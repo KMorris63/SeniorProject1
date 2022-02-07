@@ -1,0 +1,40 @@
+<?php
+
+ /*
+ * updateLayout.php
+ * Kacey Morris
+ * January 30, 2021
+ * CST 452 Code Drop 1 - Layouts
+ *
+ * This page updates a layout and redirects back to the all layouts table.
+ *
+ * This is my own work, as influenced by class time and videos.
+ */
+
+require_once '../../header.php';
+
+$id = $_GET['id'];
+// These variables are taking information posted from the form and saving it to be used later
+$label = trim($_GET['Label']);
+$image = trim($_GET['Image']);
+$topLeft = trim($_GET['TopLeft']);
+$topRight = trim($_GET['TopRight']);
+$bottomLeft = trim($_GET['BottomLeft']);
+$bottomRight = trim($_GET['BottomRight']);
+
+$bs = new LayoutBusinessService();
+// create a new layout with the updated information
+$newLayout = new Layout($id, $label, $image, $topLeft, $topRight, $bottomLeft, $bottomRight);
+
+// call the business service method for update
+$success = $bs->updateOne($id, $newLayout);
+
+if ($success) {
+    echo "Layout was updated<br>";
+    // redirect to the layouts list
+    header("Location: ../views/displayAllLayouts.php");
+}
+else {
+    echo "<h3>Nothing updated.</h3>";
+}
+?>
