@@ -1,0 +1,220 @@
+/* Magic Mirror Config Sample
+ *
+ * By Michael Teeuw https://michaelteeuw.nl
+ * MIT Licensed.
+ *
+ * For more information on how you can configure this file
+ * see https://docs.magicmirror.builders/getting-started/configuration.html#general
+ * and https://docs.magicmirror.builders/modules/configuration.html
+ */
+let config = {
+	address: "localhost", 	// Address to listen on, can be:
+							// - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+							// - another specific IPv4/6 to listen on a specific interface
+							// - "0.0.0.0", "::" to listen on any interface
+							// Default, when address config is left out or empty, is "localhost"
+	port: 8080,
+	basePath: "/", 	// The URL path where MagicMirror is hosted. If you are using a Reverse proxy
+					// you must set the sub path here. basePath must end with a /
+	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"], 	// Set [] to allow all IP addresses
+															// or add a specific IPv4 of 192.168.1.5 :
+															// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+															// or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+															// ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
+
+	useHttps: false, 		// Support HTTPS or not, default "false" will use HTTP
+	httpsPrivateKey: "", 	// HTTPS private key path, only require when useHttps is true
+	httpsCertificate: "", 	// HTTPS Certificate path, only require when useHttps is true
+
+	language: "en",
+	locale: "en-US",
+	logLevel: ["INFO", "LOG", "WARN", "ERROR"], // Add "DEBUG" for even more logging
+	timeFormat: 12,
+	units: "imperial",
+	// serverOnly:  true/false/"local" ,
+	// local for armv6l processors, default
+	//   starts serveronly and then starts chrome browser
+	// false, default for all NON-armv6l devices
+	// true, force serveronly mode, because you want to.. no UI on this device
+
+	modules: [
+	/*
+		{
+			module: "alert",
+			config: {
+				title: "Testing Alert Title",
+				message: "Testing Alert Message",
+				welcome_message: "Alert"
+			}
+		},
+		* */
+		/*
+		{
+			module: "updatenotification",
+			position: "top_bar"
+		},
+		* */
+		/*
+		{
+			module: "clock",
+			position: "top_left",
+			config: {
+				timezone: "America/New_York",
+				secondsColor: "#00FFFF"
+			}
+		},
+		* */
+		{
+			module: "calendar",
+			header: "US Holidays",
+			position: "top_left",
+			config: {
+				calendars: [
+					{
+						symbol: "calendar-check",
+						url: "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics"
+					}
+				]
+			}
+		},
+		
+		{
+			module: "compliments",
+			position: "lower_third"
+		},
+
+		{
+			module: "weather",
+			config: {
+				weatherProvider: "openweathermap",
+				type: "current",
+				location: "Phoenix",
+				locationID: "5308655", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				apiKey: "0c622a06c0944cd3d029255097fefa7e"
+			},
+			position: "top_right"
+		},
+
+		/*
+		{
+			module: "weather",
+			position: "top_right",
+			header: "Weather Forecast",
+			config: {
+				weatherProvider: "openweathermap",
+				type: "forecast",
+				location: "Arizona",
+				locationID: "5308655", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+				apiKey: "0c622a06c0944cd3d029255097fefa7e"
+			}
+		},
+		*/
+
+		{
+			module: "newsfeed",
+			position: "bottom_bar",
+			config: {
+				feeds: [
+					{
+						title: "New York Times",
+						url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+					}
+				],
+				showSourceTitle: true,
+				showPublishDate: true,
+				broadcastNewsFeeds: true,
+				broadcastNewsUpdates: true
+			}
+		},
+
+/*
+		{
+			module: "helloworld",
+			position: "center",
+			config: {
+				text: "Hello World!"
+			}
+		},
+*/
+		/*
+		{
+			module: "MMM-MoonPhase",
+			position: "top_center",
+			config: {
+				updateInterval: 43200000,
+				hemisphere: "N",
+				resolution: "detailed",
+				basicColor: "white",
+				title: true,
+				phase: true,
+				x: 200,
+				y: 200,
+				alpha: 0.7
+			}
+		},
+		*/
+
+		{
+			module: "MMM-Globe",
+			position: "top_center",
+			config: {
+				style: "geoColor",
+				imageSize: 200,
+				ownImagePath: "",
+				updateInterval: 10*60*1000
+			}
+		},
+		/*
+		{
+			module: "MMM-DailyBibleVerse",
+			position: "bottom_bar",
+			config: {
+				version: "NIV",
+				size: "small"
+			}
+		},
+		* */
+		/*
+		{
+			module: "MMM-AlarmClock",
+			position: "bottom_bar",
+			config: {
+				alarms: [
+					{time: "20:00", days: [2], title: "Testing", message: "Test Alarm", sound: "alarm.mp3"},
+				],
+			}
+		},
+		* */
+		{
+			disabled: false,
+			module: "MMM-Insults",
+			position: "top_bar",
+			config: {
+				static: "You are ",
+				newInsult: 60 * 1000,
+			}
+		},
+		/*
+		{
+			module: "MMM-MyScoreboard",
+			position: "bottom_bar",
+			classes: "default everyone",
+			header: "My Scoreboard",
+			config: {
+				showLeagueSeparators: true,
+				colored: true,
+				viewStyle: "mediumLogos",
+				sports: [
+					{
+						league: "NFL",
+						teams: ["ARI"]
+					}
+				]			
+			}
+		},
+		* */
+	]
+};
+
+/*************** DO NOT EDIT THE LINE BELOW ***************/
+if (typeof module !== "undefined") {module.exports = config;}

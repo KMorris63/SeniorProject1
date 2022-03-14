@@ -18,7 +18,15 @@ class User {
     private $password;
     private $email;
     
-    // constructor
+    /**
+     * Data constructor for a user object, passing parameters for all properties
+     *
+     * @param int $passID
+     * @param string $passUsername
+     * @param string $passPassword
+     * @param string $passEmail
+     * @return void
+     */
     function __construct($passID, $passUsername, $passPassword, $passEmail) {
         $this->id = $passID;
         $this->username = $passUsername;
@@ -28,7 +36,7 @@ class User {
     
     // getters and setters
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -36,7 +44,7 @@ class User {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUsername()
     {
@@ -44,7 +52,7 @@ class User {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPassword()
     {
@@ -52,7 +60,7 @@ class User {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEmail()
     {
@@ -60,7 +68,7 @@ class User {
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -68,7 +76,7 @@ class User {
     }
 
     /**
-     * @param mixed $username
+     * @param string $username
      */
     public function setUsername($username)
     {
@@ -76,7 +84,7 @@ class User {
     }
 
     /**
-     * @param mixed $password
+     * @param string $password
      */
     public function setPassword($password)
     {
@@ -84,7 +92,7 @@ class User {
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
      */
     public function setEmail($email)
     {

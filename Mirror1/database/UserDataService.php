@@ -14,7 +14,12 @@
 require_once '../../Autoloader.php';
 
 class UserDataService {
-    // create a new user (register)
+	/**
+	 * creates a new user with the properties of the user passed
+	 *
+	 * @param User $user
+	 * @return boolean
+	 */
     function createUser($user) {
         // accepts user object and inserts into user table
         // access database
@@ -51,7 +56,11 @@ class UserDataService {
             return false;
         }
     }
-    // display all available users
+    /**
+     * get all users in an array from the database
+     *
+     * @return User
+     */
     function getAllUsers() {
         // connect to database
         $db = new Database();
@@ -91,7 +100,12 @@ class UserDataService {
         }
     }
     
-    // find by id functions
+    /**
+     * returns a user array containing a single user with this id
+     *
+     * @param int $id
+     * @return User[]
+     */
     function findByID($id) {
         // should return a user object
         $db = new Database();
@@ -138,7 +152,12 @@ class UserDataService {
         }
     }
     
-    // delete user from database with this ID
+    /**
+     * deletes the user from the database with this ID
+     *
+     * @param int $id
+     * @return boolean
+     */
     function deleteItem($id) {
         // return true for success, false for failure
         // access database
@@ -169,7 +188,13 @@ class UserDataService {
         }
     }
     
-    // update user in database
+    /**
+     * updates this id with the data from the passed user object
+     *
+     * @param int $id
+     * @param User $user
+     * @return boolean
+     */
     function updateOne($id, $user) {
         // id is the user to update, returns true for success, user is object used to change
         // access database

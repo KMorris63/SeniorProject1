@@ -21,7 +21,18 @@ class Layout {
     private $bottomRight;
     private $isActive;
 
-    // constructor
+    /**
+    * Data constructor for a layout object, passing parameters for all properties
+    *
+    * @param int $passID
+    * @param string $passLabel
+    * @param string $passImage
+    * @param string $passTopLeft
+    * @param string $passTopRight
+    * @param string $passBottomLeft
+    * @param string $passBottomRight
+    * @return void
+    */
     function __construct($passID, $passLabel, $passImage, $passTopLeft, $passTopRight, $passBottomLeft, $passBottomRight) {
         $this->id = $passID;
         $this->label = $passLabel;
@@ -35,7 +46,7 @@ class Layout {
     // getters and setters
     
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -43,7 +54,7 @@ class Layout {
     }
     
     /**
-     * @return mixed
+     * @return string
      */
     public function getLabel()
     {
@@ -51,7 +62,7 @@ class Layout {
     }
     
     /**
-     * @return mixed
+     * @return string
      */
     public function getImage()
     {
@@ -59,7 +70,7 @@ class Layout {
     }
     
     /**
-     * @return mixed
+     * @return string
      */
     public function getTopLeft()
     {
@@ -67,7 +78,7 @@ class Layout {
     }
     
     /**
-     * @return mixed
+     * @return string
      */
     public function getTopRight()
     {
@@ -75,7 +86,7 @@ class Layout {
     }
     
     /**
-     * @return mixed
+     * @return string
      */
     public function getBottomLeft()
     {
@@ -83,7 +94,7 @@ class Layout {
     }
     
     /**
-     * @return mixed
+     * @return string
      */
     public function getBottomRight()
     {
@@ -91,7 +102,7 @@ class Layout {
     }
     
     /**
-     * @return mixed
+     * @return int
      */
     public function getIsActive()
     {
@@ -99,7 +110,7 @@ class Layout {
     }
     
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -107,7 +118,7 @@ class Layout {
     }
     
     /**
-     * @param mixed $label
+     * @param string $label
      */
     public function setLabel($label)
     {
@@ -115,7 +126,7 @@ class Layout {
     }
     
     /**
-     * @param mixed $image
+     * @param string $image
      */
     public function setImage($image)
     {
@@ -123,7 +134,7 @@ class Layout {
     }
     
     /**
-     * @param mixed $topLeft
+     * @param string $topLeft
      */
     public function setTopLeft($topLeft)
     {
@@ -131,7 +142,7 @@ class Layout {
     }
     
     /**
-     * @param mixed $topRight
+     * @param string $topRight
      */
     public function setTopRight($topRight)
     {
@@ -139,7 +150,7 @@ class Layout {
     }
     
     /**
-     * @param mixed $bottomLeft
+     * @param string $bottomLeft
      */
     public function setBottomLeft($bottomLeft)
     {
@@ -147,7 +158,7 @@ class Layout {
     }
     
     /**
-     * @param mixed $bottomRight
+     * @param string $bottomRight
      */
     public function setBottomRight($bottomRight)
     {
@@ -155,7 +166,7 @@ class Layout {
     }
     
     /**
-     * @param mixed $isActive
+     * @param int $isActive
      */
     public function setIsActive($isActive)
     {

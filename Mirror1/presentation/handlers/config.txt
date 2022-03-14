@@ -1,0 +1,61 @@
+
+let config = {
+	address: "localhost",
+	port: 8080,
+	basePath: "/",
+	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"],
+
+	useHttps: false,
+	httpsPrivateKey: "",
+	httpsCertificate: "",
+
+	language: "en",
+	locale: "en-US",
+	logLevel: ["INFO", "LOG", "WARN", "ERROR"],
+	timeFormat: 12,
+	units: "imperial",
+
+	modules: [ 
+
+{
+ module: "clock",
+ config: {
+ timezone: "America/New_York",
+ secondsColor: "#00FFFF"
+ },
+position: "top_left"
+				},
+				{
+	module: "calendar",
+	header: "US Holidays",
+	config: {
+		calendars: [
+		{
+			symbol: "calendar-check",
+			url: "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics"
+		}
+		]
+	},
+position: "top_right"
+				},
+				{
+	module: "compliments",
+position: "bottom_left"
+				},
+				{
+	module: "weather",
+	config: {
+		weatherProvider: "openweathermap",
+		type: "current",
+		location: "Phoenix",
+		locationID: "5308655", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+		apiKey: "0c622a06c0944cd3d029255097fefa7e"
+	},
+position: "bottom_right"
+				},
+				
+]
+};
+
+/*************** DO NOT EDIT THE LINE BELOW ***************/
+if (typeof module !== "undefined") {module.exports = config;}

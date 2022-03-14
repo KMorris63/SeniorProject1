@@ -7,18 +7,9 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/Mirror1/presentation/views/login.php">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/Mirror1/presentation/views/register.php">Register</a>
-      </li>
     <?php
       if (isset($_SESSION['username'])) {
     ?>
-        <li class="nav-item">
-          <a class="nav-link" href="/Mirror1/presentation/views/home.php">Home</a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" href="/Mirror1/presentation/views/displayAllUsers.php">Users</a>
         </li>
@@ -32,8 +23,15 @@
           <a class="nav-link" href="/Mirror1/presentation/handlers/logout.php">Logout</a>
         </li>
     <?php
-      }
+      } else {
     ?>
+      <li class="nav-item">
+        <a class="nav-link" href="/Mirror1/presentation/views/login.php">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Mirror1/presentation/views/register.php">Register</a>
+      </li>
+    <?php }?>
     </ul>
   </div>
   </div>

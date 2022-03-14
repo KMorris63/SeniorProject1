@@ -19,21 +19,30 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 // includes database
-require_once 'Database.php';
+// require_once 'Database.php';
 
 class SecurityService {
     // properties
     private $username = "";
     private $password = "";
     
-    // data constructor
+    /**
+     * data constructor for security service object
+     *
+     * @param string $username
+     * @param string $password
+     * @return void
+     */
     function __construct($username, $password) {
         $this->username = $username;
         $this->password = $password;
     }
     
-    // authenticates a username and password through database
-    // sets session variable for userid
+    /**
+     * authenticates a username and password through database and sets session variable for userid
+     *
+     * @return boolean
+     */
     public function authenticate() {
         // return true;
         // return true if authenticated, false if not

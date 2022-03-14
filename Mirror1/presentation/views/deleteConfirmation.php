@@ -9,8 +9,9 @@
  *
  * This is my own work, as influenced by class time and videos.
  */
-$_SESSION['title'] = "Home";
 require_once '../../header.php';
+
+$id = $_GET['id'];
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -25,14 +26,15 @@ require_once '../../header.php';
 
 <body>
 	<div class="hero">
-		<h1 class="heroTxt">Home</h1>
+		<h1 class="heroTxt">Delete?</h1>
 	</div>
 	<div class="container">
-		<?php if(isset($_SESSION['username'])) {?>
-		<h3>You have been logged in, <?php echo $_SESSION['username']; ?></h3>
-		<?php } else {?>
-		<h3>Please <a class="homeLink" href="http://localhost:81/Mirror1/presentation/views/login.php">login</a> or <a class="homeLink" href="http://localhost:81/Mirror1/presentation/views/register.php">register</a>!</h3>
-		<?php }?>
+		<h3>Are you sure you would like to delete?</h3>
+		<form action="../handlers/deleteLayout.php">
+			<?php echo "<input type='hidden' name='id' value='" . $id . "'>" ?>
+            <input type="submit" class="buttonLogin" value="Yes">
+		</form>
+		<a href="displayAllLayouts.php" class="buttonLogin">No</a>
 	</div>
 </body>
 </html>

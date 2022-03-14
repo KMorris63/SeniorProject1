@@ -23,7 +23,11 @@ class Database {
     // private $dbpassword = "password";
     private $dbname = "mirror";
     
-    // connects to database
+    /**
+     * connects to database
+     *
+     * @return mysqli_result
+     */
     function getConnection() {
         $conn = new mysqli($this->dbservername, $this->dbusername, $this->dbpassword, $this->dbname);
         

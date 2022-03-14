@@ -20,8 +20,10 @@ require_once '../../header.php';
 <title>Register User Form</title>
 </head>
 <body>
+	<div class="hero">
+		<h1 class="heroTxt">Register</h1>
+	</div>
 <div class="container">
-<h1>Register a New User</h1>
 <!-- method post. get is in url -->
 <form action="../handlers/registerHandler.php">
   <div class="form-group">
@@ -36,7 +38,7 @@ require_once '../../header.php';
     <label for="email">Email</label>
     <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="buttonLogin">Register</button>
 </form>
 </div>
 </body>

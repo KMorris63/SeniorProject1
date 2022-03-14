@@ -14,22 +14,21 @@
 // required files
 require_once '../../Autoloader.php';
 
-class LayoutDataService {
+class PreferenceDataService {
 	/**
-	 * creates a new layout with the properties of the layout passed
+	 * creates a new preference with the properties of the preference passed
 	 *
-	 * @param Layout $layout
 	 * @return boolean
 	 */
-    function createLayout($layout) {
-        // accepts layout object and inserts into layout table
+    function createPreference($preference) {
+        // accepts preference object and inserts into preference table
         // access database
         $db = new Database();
         
         $connection = $db->getConnection();
-        
+        // $id, $alert, $alertTime, $alertLabel, $alarm, $alarmTime, $alarmLabel, $days, $timezone, $location, $text, $league, $team
         // update item
-        $stmt = $connection->prepare("INSERT INTO LAYOUTS (LABEL, IMAGE, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $connection->prepare("INSERT INTO PREFERENCES (ALERT, ALERT_TIME, ALERT_LABEL, ALARM, ALARM_TIME, ALARM_LABEL, DAYS, TIMEZONE, LOCATION, TEXT, LEAGUE, TEAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
         // if the statement wasn't prepared
         if (!$stmt) {
@@ -38,12 +37,18 @@ class LayoutDataService {
         }
         
         // get parameters
-        $label = $layout->getLabel();
-        $image = $layout->getImage();
-        $tleft = $layout->getTopLeft();
-        $tright = $layout->getTopRight();
-        $bleft = $layout->getBottomLeft();
-        $bright = $layout->getBottomRight();
+        $alert = $preference->getAlert();
+        $alertTime = $preference->getAlertTime();
+        $alertLabel = $preference->getAlertLabel();
+        $alarm = $preference->getAlarm();
+        $alarmTime = $preference->getAlarmTime();
+        $alarmLabel = $preference->getAlarmLabel();
+        $days = $preference->getDays();
+        $timezone = $preference->getTimezone();
+        $location = $preference->getLocation();
+        $text = $preference->getText();
+        $league = $preference->getLeague();
+        $team = $preference->getTeam();
         
         // bind parameters s means string, i means int, d means decimal
         $stmt->bind_param("ssssss", $label, $image, $tleft, $tright, $bleft, $bright);
@@ -61,56 +66,13 @@ class LayoutDataService {
     }
     
     /**
-     * get all layouts in an array from the database
+     * returns a preference array containing a single preference associated with this user
      *
-     * @return Layout[]
+     * @param int $userid
+     * @return Preference
      */
-    function getAllLayouts() {
-        // connect to database
-        $db = new Database();
-        $connection = $db->getConnection();
-        $stmt = $connection->prepare("SELECT * FROM LAYOUTS");
-        
-        if (!$stmt) {
-            echo "Something wrong in the binding process. sql error?";
-            exit;
-        }
-        
-        // execute query
-        $stmt->execute();
-        
-        // get results
-        $result = $stmt->get_result();
-        
-        if (!$result) {
-            echo "assume SQL statment has an error";
-            return null;
-            exit;
-        }
-        
-        if ($result->num_rows == 0) {
-            return null;
-        }
-        else {
-            // add layouts to array
-            $layoutArray = Array();
-            
-            while ($layout = $result->fetch_assoc()) {
-                array_push($layoutArray, $layout);
-            }
-            
-            // return array
-            return $layoutArray;
-        }
-    }
-    
-    /**
-     * returns a layout array containing a single layout with this id
-     *
-     * @param int $id
-     * @return Layout[]
-     */
-    function findByID($id) {
+    // NEEDS DEVELOPMENT
+    function getPreference($id) {
         // should return a layout object
         $db = new Database();
         $connection = $db->getConnection();
@@ -157,50 +119,15 @@ class LayoutDataService {
     }
     
     /**
-     * deletes the layout from the database with this ID
+     * updates this id with the data from the passed preference object
      *
      * @param int $id
+     * @param Preference $preference
      * @return boolean
      */
-    function deleteItem($id) {
-        // return true for success, false for failure
-        // access database
-        $db = new Database();
-        
-        $connection = $db->getConnection();
-        
-        // delete item
-        $stmt = $connection->prepare("DELETE FROM LAYOUTS WHERE ID = ? LIMIT 1");
-        
-        if (!$stmt) {
-            echo "something went wrong in the binding process";
-            exit;
-        }
-        
-        // bind parameters
-        $stmt->bind_param("s", $id);
-        
-        // execute query
-        $stmt->execute();
-        
-        // did it work
-        if ($stmt->affected_rows > 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    
-    /**
-     * updates this id with the data from the passed layout object
-     *
-     * @param int $id
-     * @param Layout $layout
-     * @return boolean
-     */
+    // NEEDS DEVELOPMENT
     function updateOne($id, $layout) {
-        // id is the layout to update, returns true for success, layout is object used to change
+        // id is the preferences to update, returns true for success, preferences is object used to change
         // access database
         $db = new Database();
         

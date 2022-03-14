@@ -17,13 +17,15 @@ $bs = new UserBusinessService();
 // call business service and save array 
 $users = $bs->getAllUsers();
 
-echo "<div class='container'> <h1>Users</h1>";
-
 ?>
+
+<div class="hero">
+	<h1 class="heroTxt">Users</h1>
+</div>
 
 <!-- start of the table -->
 
-<div class="container" padding="50px">
+<div class="container">
 
 <table class="table table-hover">
 
@@ -72,13 +74,13 @@ for ($x = 0; $x < count($users); $x++) {
     echo "<td><input type='text' class='form-control' id='username' value='" . $users[$x]['USERNAME'] . "' name='Username'></td>";
     echo "<td><input type='text' class='form-control' id='password' value='" . $users[$x]['PASSWORD'] . "' name='Password'></td>";
     echo "<td><input type='text' class='form-control' id='email' value='" . $users[$x]['EMAIL'] . "' name='Email'></td>";
-    echo "<td><input type='submit' value='Edit'></td>
+    echo "<td><input type='submit' class='buttonLogin' value='Edit'></td>
     </form>";
     // pass ID as hidden value with each button
     echo "<td>
-            <form action='../handlers/deleteUser.php'>
+            <form action='deleteUserConfirmation.php'>
                 <input type='hidden' name='id' value='" . $users[$x]['ID'] . "'>
-                <input type='submit' value='Delete'>
+                <input type='submit' class='buttonLogin' value='Delete'>
             </form>
         </td>";
     echo "</tr>";

@@ -19,7 +19,12 @@ ini_set("display_errors", 1);
 require_once '../../Autoloader.php';
 
 class UserBusinessService {
-    // creates a new user with the properties of the user passed
+	/**
+	 * creates a new user with the properties of the user passed
+	 *
+	 * @param User $user
+	 * @return boolean
+	 */
     function createUser($user) {
         // call data service method
         $dbService = new UserDataService();
@@ -28,7 +33,12 @@ class UserBusinessService {
         // returns true or false
         return $success;
     }
-    // get all users in an array from the database
+    
+    /**
+     * get all users in an array from the database
+     *
+     * @return User
+     */
     function getAllUsers() {
         // call data service method
         $dbService = new UserDataService();
@@ -38,7 +48,12 @@ class UserBusinessService {
         return $users;
     }
     
-    // returns a user array containing a single user with this id
+    /**
+     * returns a user array containing a single user with this id
+     *
+     * @param int $id
+     * @return User[]
+     */
     function findByID($id) {
         $users = array();
         
@@ -49,7 +64,12 @@ class UserBusinessService {
         return $users;
     }
     
-    // deletes the user from the database with this ID
+    /**
+     * deletes the user from the database with this ID
+     *
+     * @param int $id
+     * @return boolean
+     */
     function deleteItem($id) {
         $dbService = new UserDataService();
         $success = $dbService->deleteItem($id);
@@ -58,7 +78,13 @@ class UserBusinessService {
         return $success;
     }
     
-    // updates this id with the data from the passed user object
+    /**
+     * updates this id with the data from the passed user object
+     *
+     * @param int $id
+     * @param User $user
+     * @return boolean
+     */
     function updateOne($id, $user) {
         $dbService = new UserDataService();
         $success = $dbService->updateOne($id, $user);

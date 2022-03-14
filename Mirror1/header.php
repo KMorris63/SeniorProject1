@@ -22,9 +22,3 @@ session_start();
 // include the nav bar
 require_once '_navbar.php';
 require_once 'Autoloader.php';
-
-?>
-
-<div class="hero"></div>
-
-<?php 

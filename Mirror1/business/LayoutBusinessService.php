@@ -19,7 +19,12 @@ ini_set("display_errors", 1);
 require_once '../../Autoloader.php';
 
 class LayoutBusinessService {
-    // creates a new layout with the properties of the layout passed
+	/**
+	 * creates a new layout with the properties of the layout passed
+	 *
+	 * @param Layout $layout
+	 * @return boolean
+	 */
     function createLayout($layout) {
         // call data service method
         $dbService = new LayoutDataService();
@@ -29,7 +34,11 @@ class LayoutBusinessService {
         return $success;
     }
     
-    // get all layouts in an array from the database
+    /**
+     * get all layouts in an array from the database
+     *
+     * @return Layout[]
+     */
     function getAllLayouts() {
         // call data service method
         $dbService = new LayoutDataService();
@@ -39,7 +48,12 @@ class LayoutBusinessService {
         return $layouts;
     }
     
-    // returns a layout array containing a single layout with this id
+    /**
+     * returns a layout array containing a single layout with this id
+     *
+     * @param int $id
+     * @return Layout[]
+     */
     function findByID($id) {
         $layouts = array();
         
@@ -51,7 +65,12 @@ class LayoutBusinessService {
         return $layouts;
     }
     
-    // deletes the layout from the database with this ID
+    /**
+     * deletes the layout from the database with this ID
+     *
+     * @param int $id
+     * @return boolean
+     */
     function deleteItem($id) {
         $dbService = new LayoutDataService();
         $success = $dbService->deleteItem($id);
@@ -60,7 +79,13 @@ class LayoutBusinessService {
         return $success;
     }
     
-    // updates this id with the data from the passed layout object
+    /**
+     * updates this id with the data from the passed layout object
+     *
+     * @param int $id
+     * @param Layout $layout
+     * @return boolean
+     */
     function updateOne($id, $layout) {
         $dbService = new LayoutDataService();
         $success = $dbService->updateOne($id, $layout);

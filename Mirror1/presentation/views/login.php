@@ -9,7 +9,7 @@
  *
  * This is my own work, as influenced by class time and videos.
  */
- 
+
 require_once '../../header.php';
 
 ?>
@@ -24,8 +24,10 @@ require_once '../../header.php';
 </head>
 
 <body>
+	<div class="hero">
+		<h1 class="heroTxt">Login</h1>
+	</div>
 	<div class="container">
-		<h1>Login</h1>
 		<!-- method post. get is in url -->
 		<form action="../handlers/loginHandler.php" method="post">
 			<div class="form-group">
@@ -36,7 +38,7 @@ require_once '../../header.php';
 				<label for="password">Password</label>
 				<input type="password" class="form-control" id="password" name="password">
 			</div>
-			<input name="login" value="Login" type="submit" class="btn btn-primary">
+			<input name="login" value="Login" type="submit" class="buttonLogin">
 		</form>
 	</div>
 </body>
