@@ -19,8 +19,7 @@ ini_set("display_errors", 1);
 require_once '../../Autoloader.php';
 
 class PreferenceBusinessService {
-	// this will be called when a user is created, all users should begin with default preferences
-	// NEEDS DEVELOPMENT
+	// **************** this will be called when a user is created, all users should begin with default preferences
 	/**
 	 * creates a new preference with the properties of the preference passed
 	 *
@@ -41,7 +40,6 @@ class PreferenceBusinessService {
      * @param int $userid
      * @return Preference
      */
-    // NEEDS DEVELOPMENT
     function getPreference($userid) {
         $preferences = array();
         
@@ -60,7 +58,6 @@ class PreferenceBusinessService {
      * @param Preference $preference
      * @return boolean
      */
-    // NEEDS DEVELOPMENT
     function updateOne($id, $preference) {
         $dbService = new PreferenceDataService();
         $success = $dbService->updateOne($id, $preference);

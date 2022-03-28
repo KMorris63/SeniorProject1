@@ -21,7 +21,8 @@ class Preference {
     private $alarm;
     private $alarmTime;
     private $alarmLabel;
-    // array
+    private $alarmMessage;
+    // array [0 => sunday, 1, 2, 3]
     private $days;
     private $timezone;
     private $location;
@@ -39,6 +40,7 @@ class Preference {
      * @param boolean $passAlarm
      * @param string $passAlarmTime
      * @param string $passAlarmLabel
+     * @param string $passAlarmMessage
      * @param string[] $passDays
      * @param string $passTimezone
      * @param string $passLocation
@@ -47,7 +49,7 @@ class Preference {
      * @param string $passTeam
      * @return void
      */
-    function __construct($passID, $passAlert, $passAlertTime, $passAlertLabel, $passAlarm, $passAlarmTime, $passAlarmLabel, $passDays, $passTimezone, $passLocation,
+    function __construct($passID, $passAlert, $passAlertTime, $passAlertLabel, $passAlarm, $passAlarmTime, $passAlarmLabel, $passAlarmMessage, $passDays, $passTimezone, $passLocation,
     		$passText, $passLeague, $passTeam) {
     	$this->id = $passID;
     	$this->alert = $passAlert;
@@ -56,6 +58,7 @@ class Preference {
     	$this->alarm = $passAlarm;
     	$this->alarmTime = $passAlarmTime;
     	$this->alarmLabel = $passAlarmLabel;
+    	$this->alarmMessage = $passAlarmMessage;
     	$this->days = $passDays;
     	$this->timezone = $passTimezone;
     	$this->location = $passLocation;
@@ -112,6 +115,14 @@ class Preference {
 	public function getAlarmLabel() {
 		return $this->alarmLabel;
 	}
+	
+	/**
+	 * @return string
+	 */
+	public function getAlarmMessage() {
+		return $this->alarmMessage;
+	}
+
 
 	/**
 	 * @return string[]
@@ -202,6 +213,13 @@ class Preference {
 	 */
 	public function setAlarmLabel($alarmLabel) {
 		$this->alarmLabel = $alarmLabel;
+	}
+	
+	/**
+	 * @param string $alarmMessage
+	 */
+	public function setAlarmMessage($alarmMessage) {
+		$this->alarmMessage = $alarmMessage;
 	}
 
 	/**
