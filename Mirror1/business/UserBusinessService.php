@@ -9,6 +9,8 @@
  * The user business service conducts all business logic for user functions.
  *
  * This is my own work, as influenced by class time and videos.
+ * 
+ * this is the user business service 
  */
 
 // error reporting
