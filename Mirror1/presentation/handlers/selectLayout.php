@@ -256,8 +256,8 @@ if (in_array($layout->getBottomRight(), $modules)) {
 	$text = $moduleText[$index];
 	// append the text to the end of the content
 	$content = $content . $text . 'position: "bottom_right"
-				},
-				';
+},
+';
 }
 
 // add end file requirements
@@ -268,17 +268,23 @@ $content = $content . '
 /*************** DO NOT EDIT THE LINE BELOW ***************/
 if (typeof module !== "undefined") {module.exports = config;}';
 
-// create the file if it doesnt exist and put the content in it
-file_put_contents($file, $content);
-echo "<h2>Successfully selected layout labeled " . $layout->getLabel() . " !</h2>";
 // echo $content;
 
 // what is our current working directory
-// echo getcwd();
+echo getcwd();
 
 // for managing where the file should be saved later
-// $old_path = getcwd();
-// chdir('C:\MAMP\htdocs\Mirror1');
+$old_path = getcwd();
+chdir('/');
+chdir('home/pi/MagicMirror/config');
+
+// create the file if it doesnt exist and put the content in it
+file_put_contents($file, $content);
+echo "<h2>Successfully selected layout labeled " . $layout->getLabel() . " !</h2>";
+
+// change back to this directory
+chdir($old_path);
+
 ?>
 </body>
 </html>
