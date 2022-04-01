@@ -28,7 +28,7 @@ class UserDataService {
         $connection = $db->getConnection();
         
         // update item
-        $stmt = $connection->prepare("INSERT INTO USERS (USERNAME, PASSWORD, EMAIL) VALUES (?, ?, ?)");
+        $stmt = $connection->prepare("INSERT INTO users (USERNAME, PASSWORD, EMAIL) VALUES (?, ?, ?)");
         
         // if the statement wasn't prepared
         if (!$stmt) {
@@ -65,7 +65,7 @@ class UserDataService {
         // connect to database
         $db = new Database();
         $connection = $db->getConnection();
-        $stmt = $connection->prepare("SELECT * FROM USERS");
+        $stmt = $connection->prepare("SELECT * FROM users");
         
         if (!$stmt) {
             echo "Something wrong in the binding process. sql error?";
@@ -111,7 +111,7 @@ class UserDataService {
         $db = new Database();
         $connection = $db->getConnection();
         // select with this ID exactly
-        $stmt = $connection->prepare("SELECT * FROM USERS WHERE ID = ? LIMIT 1");
+        $stmt = $connection->prepare("SELECT * FROM users WHERE ID = ? LIMIT 1");
         
         if (!$stmt) {
             echo "Something wrong in the binding process. sql error?";
@@ -166,7 +166,7 @@ class UserDataService {
         $connection = $db->getConnection();
         
         // delete item
-        $stmt = $connection->prepare("DELETE FROM USERS WHERE ID = ? LIMIT 1");
+        $stmt = $connection->prepare("DELETE FROM users WHERE ID = ? LIMIT 1");
         
         if (!$stmt) {
             echo "something went wrong in the binding process";
@@ -203,7 +203,7 @@ class UserDataService {
         $connection = $db->getConnection();
         
         // update item
-        $stmt = $connection->prepare("UPDATE USERS SET USERNAME = ?, PASSWORD = ?, EMAIL = ? WHERE ID = ? LIMIT 1");
+        $stmt = $connection->prepare("UPDATE users SET USERNAME = ?, PASSWORD = ?, EMAIL = ? WHERE ID = ? LIMIT 1");
         
         // if the statement wasn't prepared
         if (!$stmt) {

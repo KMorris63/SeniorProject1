@@ -31,7 +31,7 @@ require_once '../../header.php';
 		<?php if(isset($_SESSION['username'])) {?>
 		<h3>You have been logged in, <?php echo $_SESSION['username']; ?></h3>
 		<?php } else {?>
-		<h3>Please <a class="homeLink" href="http://localhost:81/Mirror1/presentation/views/login.php">login</a> or <a class="homeLink" href="http://localhost:81/Mirror1/presentation/views/register.php">register</a>!</h3>
+		<h3>Please <a class="homeLink" href="login.php">login</a> or <a class="homeLink" href="register.php">register</a>!</h3>
 		<?php }?>
 	</div>
 </body>

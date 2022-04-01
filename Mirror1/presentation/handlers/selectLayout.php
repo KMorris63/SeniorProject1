@@ -213,7 +213,7 @@ let config = {
 ';
 // if the module is a feasible option
 if (in_array($layout->getTopLeft(), $modules)) {
-	echo $layout->getTopLeft() . " was in array ";
+	// echo $layout->getTopLeft() . " was in array ";
 	// get the index of the selected module TOP LEFT
 	$index = array_search($layout->getTopLeft(), $modules);
 	// get the text associated with that module
@@ -271,19 +271,28 @@ if (typeof module !== "undefined") {module.exports = config;}';
 // echo $content;
 
 // what is our current working directory
-echo getcwd();
+// echo getcwd();
 
 // for managing where the file should be saved later
 $old_path = getcwd();
 chdir('/');
-chdir('home/pi/MagicMirror/config');
+chdir('var/www/html/MagicMirror/config');
+$new_path = getcwd();
+// echo "This is the new path for the magic mirror " . $new_path;
 
 // create the file if it doesnt exist and put the content in it
-file_put_contents($file, $content);
-echo "<h2>Successfully selected layout labeled " . $layout->getLabel() . " !</h2>";
+file_put_contents($configFile, $content);
 
 // change back to this directory
 chdir($old_path);
+// refresh mirror by running bash script
+shell_exec('./restartDisplay.sh');
+// shell_exec('pm2 restart updateDisplay');
+// success message
+echo "<h2>Successfully selected layout labeled " . $layout->getLabel() . " !</h2>";
+
+// but then redirect to layouts page
+// header("Location: ../views/displayAllLayouts.php");
 
 ?>
 </body>

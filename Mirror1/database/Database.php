@@ -15,12 +15,12 @@ require_once '../../header.php';
 
 class Database {
     // properties
-    private $dbservername = "localhost";
-    // private $dbservername = "localhost:3306";
-    private $dbusername = "root";
-    private $dbpassword = "root";
-    // private $dbusername = "username";
-    // private $dbpassword = "password";
+    // private $dbservername = "localhost";
+    private $dbservername = "localhost:3306";
+    // private $dbusername = "root";
+    // private $dbpassword = "root";
+    private $dbusername = "username";
+    private $dbpassword = "password";
     private $dbname = "mirror";
     
     /**
