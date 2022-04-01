@@ -15,7 +15,7 @@ spl_autoload_register(function($class) {
     $lastdirectories = substr(getcwd(), strlen(__DIR__));
     
     // count the number of slashes (folder depth)
-    $numberoflastdirectories = substr_count($lastdirectories, '\\');
+    $numberoflastdirectories = substr_count($lastdirectories, '/');
     
     // list of possible locations that classes are found in this application
     $directories = ['business', 'business/model', 'database', 'presentation', 'presentation/handlers',
@@ -30,11 +30,12 @@ spl_autoload_register(function($class) {
             $currentDirectory = "../" . $currentDirectory;
         }
         
-        $classFile = $currentDirectory . '\\' . $class . '.php';
+        $classFile = $currentDirectory . '/' . $class . '.php';
+        // echo "class file " . $classFile;
         
         if (is_readable($classFile)) {
             // echo "WAS READABLE " . $classFile . " <br>";
-            if (require $d . '\\' . $class . ".php") {
+            if (require $d . '/' . $class . ".php") {
                 break;
             }
         }

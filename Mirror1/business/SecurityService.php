@@ -55,7 +55,7 @@ class SecurityService {
         $connection = $db->getConnection();
         
         // select all users with this username and password
-        $stmt = $connection->prepare("SELECT * FROM USERS WHERE USERNAME='" . $this->username . "'" .
+        $stmt = $connection->prepare("SELECT * FROM users WHERE USERNAME='" . $this->username . "'" .
             "AND PASSWORD='" . $this->password . "'");
         
         if (!$stmt) {

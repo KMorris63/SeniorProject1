@@ -32,10 +32,12 @@ echo "Got the username and password [" . $attemptedLoginName . " " . $attemptedP
 
 // create a security service with the passed information
 $service = new SecurityService($attemptedLoginName, $attemptedPassword);
+echo "after security service creation with credentials";
 
 // session variables for userid and username should be set
 // check over database
 $loggedIn = $service->authenticate();
+echo "after authenticate in security service";
 
 // if it was authenticated
 if ($loggedIn) {

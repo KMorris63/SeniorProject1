@@ -30,7 +30,7 @@ class PreferenceDataService {
         // insert item
         // ADD ALARM SOUND
         // for array of days, maybe save like 0|2|5|6 then split when retrieving from database or creating a module section for config file
-        $stmt = $connection->prepare("INSERT INTO PREFERENCES (ALERT, ALERT_TIME, ALERT_LABEL, ALARM, ALARM_TIME, ALARM_LABEL, ALARM_MESSAGE, DAYS, TIMEZONE, LOCATION, TEXT, LEAGUE, TEAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $connection->prepare("INSERT INTO preferences (ALERT, ALERT_TIME, ALERT_LABEL, ALARM, ALARM_TIME, ALARM_LABEL, ALARM_MESSAGE, DAYS, TIMEZONE, LOCATION, TEXT, LEAGUE, TEAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
         // if the statement wasn't prepared
         if (!$stmt) {
@@ -81,7 +81,7 @@ class PreferenceDataService {
         $db = new Database();
         $connection = $db->getConnection();
         // select with this USER ID exactly
-        $stmt = $connection->prepare("SELECT * FROM PREFERENCES WHERE USER_ID = ? LIMIT 1");
+        $stmt = $connection->prepare("SELECT * FROM preferences WHERE USER_ID = ? LIMIT 1");
         
         if (!$stmt) {
             echo "Something wrong in the binding process. sql error?";
@@ -141,7 +141,7 @@ class PreferenceDataService {
         $connection = $db->getConnection();
         
         // update item
-        $stmt = $connection->prepare("UPDATE LAYOUTS SET ALERT = ?, ALERT_TIME = ?, ALERT_LABEL = ?, ALARM = ?, ALARM_TIME = ?, 
+        $stmt = $connection->prepare("UPDATE preferences SET ALERT = ?, ALERT_TIME = ?, ALERT_LABEL = ?, ALARM = ?, ALARM_TIME = ?, 
 									ALARM_LABEL = ?, ALARM_MESSAGE = ?, DAYS = ?, TIMEZONE = ?, LOCATION = ?, TEXT = ?, LEAGUE = ?, 
 									TEAM = ? WHERE ID = ? LIMIT 1");
         

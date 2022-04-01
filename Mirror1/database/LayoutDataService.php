@@ -29,7 +29,7 @@ class LayoutDataService {
         $connection = $db->getConnection();
         
         // update item
-        $stmt = $connection->prepare("INSERT INTO LAYOUTS (LABEL, IMAGE, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $connection->prepare("INSERT INTO layouts (LABEL, IMAGE, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT) VALUES (?, ?, ?, ?, ?, ?)");
         
         // if the statement wasn't prepared
         if (!$stmt) {
@@ -69,7 +69,7 @@ class LayoutDataService {
         // connect to database
         $db = new Database();
         $connection = $db->getConnection();
-        $stmt = $connection->prepare("SELECT * FROM LAYOUTS");
+        $stmt = $connection->prepare("SELECT * FROM layouts");
         
         if (!$stmt) {
             echo "Something wrong in the binding process. sql error?";
@@ -115,7 +115,7 @@ class LayoutDataService {
         $db = new Database();
         $connection = $db->getConnection();
         // select with this ID exactly
-        $stmt = $connection->prepare("SELECT * FROM LAYOUTS WHERE ID = ? LIMIT 1");
+        $stmt = $connection->prepare("SELECT * FROM layouts WHERE ID = ? LIMIT 1");
         
         if (!$stmt) {
             echo "Something wrong in the binding process. sql error?";
@@ -170,7 +170,7 @@ class LayoutDataService {
         $connection = $db->getConnection();
         
         // delete item
-        $stmt = $connection->prepare("DELETE FROM LAYOUTS WHERE ID = ? LIMIT 1");
+        $stmt = $connection->prepare("DELETE FROM layouts WHERE ID = ? LIMIT 1");
         
         if (!$stmt) {
             echo "something went wrong in the binding process";
@@ -207,7 +207,7 @@ class LayoutDataService {
         $connection = $db->getConnection();
         
         // update item
-        $stmt = $connection->prepare("UPDATE LAYOUTS SET LABEL = ?, IMAGE = ?, TOP_LEFT = ?,
+        $stmt = $connection->prepare("UPDATE layouts SET LABEL = ?, IMAGE = ?, TOP_LEFT = ?,
                                 TOP_RIGHT = ?, BOTTOM_LEFT = ?, BOTTOM_RIGHT = ? WHERE ID = ? LIMIT 1");
         
         // if the statement wasn't prepared
