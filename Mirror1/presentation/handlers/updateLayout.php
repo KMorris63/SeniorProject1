@@ -24,17 +24,32 @@ $bottomRight = trim($_GET['BottomRight']);
 
 $bs = new LayoutBusinessService();
 // create a new layout with the updated information
-$newLayout = new Layout($id, $label, $image, $topLeft, $topRight, $bottomLeft, $bottomRight);
+$newLayout = new Layout($id, $label, $image, $topLeft, $topRight, $bottomLeft, $bottomRight, 0);
 
 // call the business service method for update
 $success = $bs->updateOne($id, $newLayout);
 
 if ($success) {
     echo "Layout was updated<br>";
-    // redirect to the layouts list
-    header("Location: ../views/displayAllLayouts.php");
+    
+    // after updating, grab from database to check for if active
+    $newLayout = $bs->findByID($id);
+    if ($newLayout->getIsActive() == 1) {
+        // redirect to the update display with selected layout (create config)
+        $url = "selectLayout.php?id=" . $id;
+        header("Location: " . $url);
+        // echo "Within is active " . $newLayout->getIsActive();
+    }
+    else {
+    
+        // redirect to the layouts list
+        header("Location: ../views/displayAllLayouts.php");
+        // echo "After is active " . $newLayout->getIsActive();
+    } 
 }
 else {
     echo "<h3>Nothing updated.</h3>";
+    // redirect to the layouts list
+    header("Location: ../views/displayAllLayouts.php");
 }
 ?>

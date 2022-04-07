@@ -108,9 +108,10 @@ table, tr:hover {
 
 .layoutDrop {
 	width: 100%;
-	padding: 10px;
+	padding: 5px 10px;
 	font-weight: 600;
 	border-radius: 10px;
+	margin-bottom: 10px;
 }
 
 select:focus-visible {
@@ -127,5 +128,22 @@ select:focus-visible {
 
 .layoutDropItem:hover {
 	background-color: #00b012 !important;
+	color: #000 !important;
+}
+
+.form-group {
+	margin-bottom: 0px !important;
+}
+
+.form-control {
+	margin-bottom: 10px !important; 
+}
+
+.activeLayout {
+	border: 2px solid #00b012 !important;
+}
+
+.disabledBtn, .disabledBtn:hover {
+	background: #777 !important;
 	color: #000 !important;
 }

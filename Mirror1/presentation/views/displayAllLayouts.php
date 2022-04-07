@@ -83,7 +83,7 @@ Select
 <!-- populate the table with the appropriate layout information -->
 <?php 
 for ($x = 0; $x < count($layouts); $x++) {
-    echo "<tr>";
+    echo "<tr"; if ($layouts[$x]['IS_ACTIVE'] == 1) { ?> class="activeLayout" <?php } echo ">";
     echo "<form action='../handlers/updateLayout.php'>
             <input type='hidden' name='id' value='" . $layouts[$x]['ID'] . "'>";
     echo "<th scope='row'>" . $layouts[$x]['ID'] . "</th>";
@@ -190,8 +190,8 @@ for ($x = 0; $x < count($layouts); $x++) {
     echo "<td>
             <form action='../handlers/selectLayout.php'>
                 <input type='hidden' name='id' value='" . $layouts[$x]['ID'] . "'>
-                <input type='submit' class='buttonLogin' value='Select'>
-            </form>
+                <input type='submit' class='buttonLogin "; if ($layouts[$x]['IS_ACTIVE'] == 1) { echo "disabledBtn' value='Active' disabled>"; } else { echo "' value='Select'>";}
+    echo "</form>
         </td>";
     echo "</tr>";
 }

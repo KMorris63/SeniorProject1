@@ -38,7 +38,7 @@ else {
 
 // send user object to business service 
 $bs = new LayoutBusinessService();
-$newLayout = new Layout(0, $label, $image, $topleft, $topright, $bottomleft, $bottomright);
+$newLayout = new Layout(0, $label, $image, $topleft, $topright, $bottomleft, $bottomright, 0);
 
 // if this worked
 if ($bs->createLayout($newLayout)) {

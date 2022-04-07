@@ -29,7 +29,7 @@ class LayoutDataService {
         $connection = $db->getConnection();
         
         // update item
-        $stmt = $connection->prepare("INSERT INTO layouts (LABEL, IMAGE, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $connection->prepare("INSERT INTO layouts (LABEL, IMAGE, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT, IS_ACTIVE) VALUES (?, ?, ?, ?, ?, ?, ?)");
         
         // if the statement wasn't prepared
         if (!$stmt) {
@@ -44,9 +44,10 @@ class LayoutDataService {
         $tright = $layout->getTopRight();
         $bleft = $layout->getBottomLeft();
         $bright = $layout->getBottomRight();
+        $active = 0;
         
         // bind parameters s means string, i means int, d means decimal
-        $stmt->bind_param("ssssss", $label, $image, $tleft, $tright, $bleft, $bright);
+        $stmt->bind_param("ssssssi", $label, $image, $tleft, $tright, $bleft, $bright, $active);
         
         // execute query
         $stmt->execute();
@@ -149,7 +150,7 @@ class LayoutDataService {
             
             // create a new layout
             $newLayout = new Layout($layoutArray[0]['ID'], $layoutArray[0]['LABEL'], $layoutArray[0]['IMAGE'],
-                $layoutArray[0]['TOP_LEFT'], $layoutArray[0]['TOP_RIGHT'], $layoutArray[0]['BOTTOM_LEFT'], $layoutArray[0]['BOTTOM_RIGHT']);
+                $layoutArray[0]['TOP_LEFT'], $layoutArray[0]['TOP_RIGHT'], $layoutArray[0]['BOTTOM_LEFT'], $layoutArray[0]['BOTTOM_RIGHT'], $layoutArray[0]['IS_ACTIVE']);
             
             // return the layout object
             return $newLayout;
@@ -225,6 +226,49 @@ class LayoutDataService {
         $bottomRight = $layout->getBottomRight();
         // bind parameters
         $stmt->bind_param("ssssssi", $label, $image, $topLeft, $topRight, $bottomLeft, $bottomRight, $id);
+        
+        // execute query
+        $stmt->execute();
+        
+        // did it work
+        if ($stmt->affected_rows > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+     /**
+     * updates this id with to be active
+     *
+     * @param int $id
+     * @return boolean
+     */
+    function setActive($id) {
+        // id is the layout to update, returns true for success, layout is object used to change
+        // access database
+        $db = new Database();
+        
+        $connection = $db->getConnection();
+        
+        // update item
+        $stmt2 = $connection->prepare("UPDATE layouts SET IS_ACTIVE = 0 WHERE IS_ACTIVE = 1 LIMIT 1");
+        
+        // execute query
+        $stmt2->execute();
+        
+        // update item
+        $stmt = $connection->prepare("UPDATE layouts SET IS_ACTIVE = 1 WHERE ID = ? LIMIT 1");
+        
+        // if the statement wasn't prepared
+        if (!$stmt) {
+            echo "something went wrong in the binding process";
+            exit;
+        }
+        
+        // bind parameters
+        $stmt->bind_param("i", $id);
         
         // execute query
         $stmt->execute();
