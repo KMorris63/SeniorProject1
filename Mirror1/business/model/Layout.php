@@ -31,9 +31,10 @@ class Layout {
     * @param string $passTopRight
     * @param string $passBottomLeft
     * @param string $passBottomRight
+    * @param int $passIsActive
     * @return void
     */
-    function __construct($passID, $passLabel, $passImage, $passTopLeft, $passTopRight, $passBottomLeft, $passBottomRight) {
+    function __construct($passID, $passLabel, $passImage, $passTopLeft, $passTopRight, $passBottomLeft, $passBottomRight, $passIsActive) {
         $this->id = $passID;
         $this->label = $passLabel;
         $this->image = $passImage;
@@ -41,6 +42,7 @@ class Layout {
         $this->topRight = $passTopRight;
         $this->bottomLeft = $passBottomLeft;
         $this->bottomRight = $passBottomRight;
+        $this->isActive = $passIsActive;
     }
     
     // getters and setters
