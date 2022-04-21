@@ -140,7 +140,7 @@ class LayoutBusinessService {
 		'{
  module: "clock",
  config: {
- timezone: "America/New_York",
+ timezone: "America/Phoenix",
  secondsColor: "#00FFFF"
  },
 ',
