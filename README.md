@@ -2,7 +2,7 @@
 Smart Mirror management site for MichMich's GitHub available Magic Mirror software. 
 This project allows for interaction with the smart mirror information modules without the need to alter backend code!
 
-Watch the Demonstration LOOM video here: 
+Watch the Demonstration LOOM video here: https://www.loom.com/share/606df57876264c0dbc7aaff9fd21f7c8
 
 Access the Website here: https://software-development-portfolio.webflow.io/projects
 
