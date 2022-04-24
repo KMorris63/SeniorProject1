@@ -25,10 +25,12 @@ class PreferenceBusinessService {
 	 *
 	 * @return boolean
 	 */
-    function createPreference() {
+    function createPreference($userid) {
+        // create a default preference
+        $preference = new Preference(0, 0, "10:30", "Default", "Default", "alarm.mp3", "6", "EST", "Phoenix, Arizona", "Hello World", "MLB", "ARI");
         // call data service method
         $dbService = new PreferenceDataService();
-        $success = $dbService->createPreference();
+        $success = $dbService->createPreference($preference, $userid);
         
         // returns true or false
         return $success;

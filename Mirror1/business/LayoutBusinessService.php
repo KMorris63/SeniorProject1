@@ -66,6 +66,20 @@ class LayoutBusinessService {
     }
     
     /**
+     * returns the currently active layout
+     *
+     * @return Layout
+     */
+    function getActiveLayout() {        
+        // access data service
+        $dbService = new LayoutDataService();
+        $layout = $dbService->getActiveLayout();
+        
+        // return layout
+        return $layout;
+    }
+    
+    /**
      * deletes the layout from the database with this ID
      *
      * @param int $id
@@ -128,6 +142,27 @@ class LayoutBusinessService {
 			"Insults", "Sports"];
 
         // alert and alarm are special cases
+	$preferencebs = new PreferenceBusinessService();
+	$preference = $preferencebs->getPreference($_SESSION['userid']);
+	// clock timezone America/Phoenix
+	// weather locationID: "5308655", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city (just Phoenix)
+	$alarm = '{
+ module: "MMM-AlarmClock",
+ position: "bottom_bar",
+ config: {
+ alarms: [
+ {time: "' . $preference->getAlarmTime() . '", days: [' . $preference->getDays() . '], title: "' . $preference->getAlarmLabel() . '", message: "' . $preference->getAlarmMessage() . '", sound: "' . $preference->getAlarmSound() . '"},
+ ],
+ }
+ },';
+ 
+ $clock = '{
+ module: "clock",
+ config: {
+ timezone: "' . $preference->getTimezone() . '",
+ secondsColor: "#00FFFF"
+ },
+';
 
         $moduleText = ['{
  module: "alert",
@@ -136,14 +171,8 @@ class LayoutBusinessService {
     message: "Testing Alert Message",
     welcome_message: "Alert"
  }
-}',
-		'{
- module: "clock",
- config: {
- timezone: "America/Phoenix",
- secondsColor: "#00FFFF"
- },
-',
+},',
+		$clock,
 		'{
  module: "calendar",
  header: "US Holidays",
@@ -164,8 +193,7 @@ class LayoutBusinessService {
  config: {
     weatherProvider: "openweathermap",
     type: "current",
-	location: "Phoenix",
-	locationID: "5308655", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+	location: "'. $preference->getLocation() . '",
 	apiKey: "0c622a06c0944cd3d029255097fefa7e"
  },
 ',
@@ -175,8 +203,7 @@ class LayoutBusinessService {
  config: {
  weatherProvider: "openweathermap",
  type: "forecast",
- location: "Arizona",
- locationID: "5308655", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+ location: "' . $preference->getLocation() . '",
  apiKey: "0c622a06c0944cd3d029255097fefa7e"
  },
 ',
@@ -198,7 +225,7 @@ class LayoutBusinessService {
 		'{
  module: "helloworld",
  config: {
- text: "Hello World!"
+ text: "' . $preference->getText() . '"
  },
 ',
 		'{
@@ -231,15 +258,7 @@ class LayoutBusinessService {
  size: "small"
  },
 ',
-		'{
- module: "MMM-AlarmClock",
- position: "bottom_bar",
- config: {
- alarms: [
- {time: "20:00", days: [2], title: "Testing", message: "Test Alarm", sound: "alarm.mp3"},
- ],
- }
- }',
+		$alarm,
 		'{
  disabled: false,
  module: "MMM-Insults",
@@ -258,12 +277,8 @@ class LayoutBusinessService {
  viewStyle: "mediumLogos",
  sports: [
  {
- league: "NHL",
- teams: ["ARI"]
- },
- {
- league: "MLB",
- teams: ["ARI"]
+ league: "' . $preference->getLeague() . '",
+ teams: ["' . $preference->getTeam() . '"]
  }
  ]
  },
@@ -340,6 +355,12 @@ class LayoutBusinessService {
         $content = $content . $text . 'position: "bottom_right"
  },
  ';
+    }
+    
+    // if they want an alarm, add it
+    if ($preference->getAlarm() == 1) {
+	// append the text to the end of the content
+        $content = $content . $alarm;
     }
 
     // add end file requirements

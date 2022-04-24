@@ -14,14 +14,11 @@ class Preference {
     // preference properties
     private $id;
     // boolean
-    private $alert;
-    private $alertTime;
-    private $alertLabel;
-    // boolean
     private $alarm;
     private $alarmTime;
     private $alarmLabel;
     private $alarmMessage;
+    private $alarmSound;
     // array [0 => sunday, 1, 2, 3]
     private $days;
     private $timezone;
@@ -34,14 +31,12 @@ class Preference {
      * Data constructor for a preferences object, passing parameters for all properties
      *
      * @param int $passID
-     * @param boolean $passAlert
-     * @param string $passAlertTime
-     * @param string $passAlertLabel
      * @param boolean $passAlarm
      * @param string $passAlarmTime
      * @param string $passAlarmLabel
      * @param string $passAlarmMessage
-     * @param string[] $passDays
+     * @param string $passAlarmSound
+     * @param string $passDays
      * @param string $passTimezone
      * @param string $passLocation
      * @param string $passText
@@ -49,16 +44,14 @@ class Preference {
      * @param string $passTeam
      * @return void
      */
-    function __construct($passID, $passAlert, $passAlertTime, $passAlertLabel, $passAlarm, $passAlarmTime, $passAlarmLabel, $passAlarmMessage, $passDays, $passTimezone, $passLocation,
+    function __construct($passID, $passAlarm, $passAlarmTime, $passAlarmLabel, $passAlarmMessage, $passAlarmSound, $passDays, $passTimezone, $passLocation,
     		$passText, $passLeague, $passTeam) {
     	$this->id = $passID;
-    	$this->alert = $passAlert;
-    	$this->alertTime = $passAlertTime;
-    	$this->alertLabel = $passAlertLabel;
     	$this->alarm = $passAlarm;
     	$this->alarmTime = $passAlarmTime;
     	$this->alarmLabel = $passAlarmLabel;
     	$this->alarmMessage = $passAlarmMessage;
+	$this->alarmSound = $passAlarmSound;
     	$this->days = $passDays;
     	$this->timezone = $passTimezone;
     	$this->location = $passLocation;
@@ -72,27 +65,6 @@ class Preference {
 	 */
 	public function getId() {
 		return $this->id;
-	}
-
-	/**
-	 * @return boolean
-	 */
-	public function getAlert() {
-		return $this->alert;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getAlertTime() {
-		return $this->alertTime;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getAlertLabel() {
-		return $this->alertLabel;
 	}
 
 	/**
@@ -122,10 +94,17 @@ class Preference {
 	public function getAlarmMessage() {
 		return $this->alarmMessage;
 	}
+	
+	/**
+	 * @return string
+	 */
+	public function getAlarmSound() {
+		return $this->alarmSound;
+	}
 
 
 	/**
-	 * @return string[]
+	 * @return string
 	 */
 	public function getDays() {
 		return $this->days;
@@ -174,27 +153,6 @@ class Preference {
 	}
 
 	/**
-	 * @param boolean $alert
-	 */
-	public function setAlert($alert) {
-		$this->alert = $alert;
-	}
-
-	/**
-	 * @param string $alertTime
-	 */
-	public function setAlertTime($alertTime) {
-		$this->alertTime = $alertTime;
-	}
-
-	/**
-	 * @param string $alertLabel
-	 */
-	public function setAlertLabel($alertLabel) {
-		$this->alertLabel = $alertLabel;
-	}
-
-	/**
 	 * @param boolean $alarm
 	 */
 	public function setAlarm($alarm) {
@@ -221,9 +179,16 @@ class Preference {
 	public function setAlarmMessage($alarmMessage) {
 		$this->alarmMessage = $alarmMessage;
 	}
+	
+	/**
+	 * @param string $alarmSound
+	 */
+	public function setAlarmSound($alarmSound) {
+		$this->alarmSound = $alarmSound;
+	}
 
 	/**
-	 * @param string[] $days
+	 * @param string $days
 	 */
 	public function setDays($days) {
 		$this->days = $days;

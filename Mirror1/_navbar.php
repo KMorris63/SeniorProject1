@@ -25,7 +25,7 @@
         </ul>
         <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item buttonLogin">
-          <a class="nav-link" style="margin-right: 0px !important;" href="/SeniorProject1/Mirror1/presentation/handlers/refreshMirror.php">Refresh</a>
+          <a class="nav-link" style="margin-right: 0px !important;" href="/SeniorProject1/Mirror1/presentation/views/preferences.php">Preferences</a>
         </li>
     <?php
       } else {
