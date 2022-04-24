@@ -26,11 +26,11 @@ Kacey Morris - Grand Canyon University
 
 ## Third-Party Software
 
-Clarke, J. https://github.com/jclarke0000/MMM-MyScoreboard. 
-Fewieden. https://github.com/fewieden/MMM-AlarmClock. 
-Garza, A. https://github.com/arthurgarzajr/MMM-DailyBibleVerse. 
-Kingdon, N. https://github.com/NolanKingdon/MMM-MoonPhase. 
-LukeSkywalker92. https://github.com/LukeSkywalker92/MMM-Globe. 
-Mykle. https://github.com/mykle1/MMM-Insults. 
-Teeuw, M. https://github.com/MichMich/MagicMirror#manual-installation. 
-Teeuw, M. https://github.com/MichMich/MagicMirror/wiki/3rd-Party-Modules. 
+- Clarke, J. https://github.com/jclarke0000/MMM-MyScoreboard. 
+- Fewieden. https://github.com/fewieden/MMM-AlarmClock. 
+- Garza, A. https://github.com/arthurgarzajr/MMM-DailyBibleVerse. 
+- Kingdon, N. https://github.com/NolanKingdon/MMM-MoonPhase. 
+- LukeSkywalker92. https://github.com/LukeSkywalker92/MMM-Globe. 
+- Mykle. https://github.com/mykle1/MMM-Insults. 
+- Teeuw, M. https://github.com/MichMich/MagicMirror#manual-installation. 
+- Teeuw, M. https://github.com/MichMich/MagicMirror/wiki/3rd-Party-Modules. 
