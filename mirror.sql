@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 01, 2022 at 03:30 AM
--- Server version: 5.7.24
--- PHP Version: 7.4.1
+-- Generation Time: Apr 24, 2022 at 01:43 PM
+-- Server version: 10.3.34-MariaDB-0+deb10u1
+-- PHP Version: 7.3.31-1~deb10u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -36,7 +34,7 @@ CREATE TABLE `layouts` (
   `TOP_RIGHT` varchar(50) NOT NULL,
   `BOTTOM_LEFT` varchar(50) NOT NULL,
   `BOTTOM_RIGHT` varchar(50) NOT NULL,
-  `IS_ACTIVE` tinyint(1) NOT NULL DEFAULT '0'
+  `IS_ACTIVE` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -45,10 +43,9 @@ CREATE TABLE `layouts` (
 
 INSERT INTO `layouts` (`ID`, `LABEL`, `IMAGE`, `TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_RIGHT`, `IS_ACTIVE`) VALUES
 (1, 'Sunday Morning', 'testing.png', 'Clock', 'Calendar', 'Compliments', 'Weather', 0),
-(3, 'testing', 'test.png', 'Forecast', 'News', 'Moon', 'Globe', 0),
-(4, 'new', 'test', 'Bible', 'Insults', 'Sports', 'Clock', 0),
-(5, 'Everyday', 'programming.jpg', 'Globe', 'Moon', 'Bible', 'Calendar', 0),
-(8, 'label', 'image', 'earth', 'Moon', '', '', 0);
+(3, 'first', 'test.png', '', 'Clock', 'Calendar', 'Compliments', 0),
+(14, 'newitemgcu', 'blank', 'Sports', 'Text', 'Moon', 'Weather', 1),
+(15, 'demo', 'img', 'Clock', 'Forecast', 'Globe', 'Compliments', 0);
 
 -- --------------------------------------------------------
 
@@ -59,9 +56,6 @@ INSERT INTO `layouts` (`ID`, `LABEL`, `IMAGE`, `TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_
 CREATE TABLE `preferences` (
   `ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
-  `ALERT` tinyint(4) NOT NULL,
-  `ALERT_TIME` varchar(50) NOT NULL,
-  `ALERT_LABEL` varchar(50) NOT NULL,
   `ALARM` tinyint(4) NOT NULL,
   `ALARM_TIME` varchar(50) NOT NULL,
   `ALARM_LABEL` varchar(50) NOT NULL,
@@ -74,6 +68,13 @@ CREATE TABLE `preferences` (
   `LEAGUE` varchar(50) NOT NULL,
   `TEAM` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `preferences`
+--
+
+INSERT INTO `preferences` (`ID`, `USER_ID`, `ALARM`, `ALARM_TIME`, `ALARM_LABEL`, `ALARM_MESSAGE`, `ALARM_SOUND`, `DAYS`, `TIMEZONE`, `LOCATION`, `TEXT`, `LEAGUE`, `TEAM`) VALUES
+(1, 1, 1, '10:26', 'test', 'test', 'blackforest.mp3', '0', 'PNT', 'Phoenix, Arizona', 'Hello, World! ', 'MLB', 'ARI');
 
 -- --------------------------------------------------------
 
@@ -93,9 +94,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `USERNAME`, `PASSWORD`, `EMAIL`) VALUES
-(1, 'user', 'pass', 'email@email.com'),
-(4, 'testing', 'test', 'realEmail@email.com'),
-(8, 'testing', 'testing', 'test@email.com');
+(1, 'user', 'pass', 'email@email.com');
 
 --
 -- Indexes for dumped tables
@@ -127,21 +126,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `layouts`
 --
 ALTER TABLE `layouts`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `preferences`
 --
 ALTER TABLE `preferences`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-COMMIT;
-
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
