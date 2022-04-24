@@ -32,7 +32,7 @@ class UserBusinessService {
         $dbService = new UserDataService();
         $success = $dbService->createUser($user);
         
-        // returns true or false
+        // returns true if created
         return $success;
     }
     

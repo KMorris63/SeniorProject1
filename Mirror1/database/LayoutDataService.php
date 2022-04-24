@@ -158,6 +158,55 @@ class LayoutDataService {
     }
     
     /**
+     * returns the active layout 
+     *
+     * @return Layout
+     */
+    function getActiveLayout() {
+        // should return a layout object
+        $db = new Database();
+        $connection = $db->getConnection();
+        // select with this ID exactly
+        $stmt = $connection->prepare("SELECT * FROM layouts WHERE IS_ACTIVE = 1 LIMIT 1");
+        
+        if (!$stmt) {
+            echo "Something wrong in the binding process. sql error?";
+            exit;
+        }
+        
+        // execute query
+        $stmt->execute();
+        
+        // get results
+        $result = $stmt->get_result();
+        
+        if (!$result) {
+            echo "assumer SQL statment has an error";
+            return null;
+            exit;
+        }
+        
+        if ($result->num_rows == 0) {
+            return null;
+        }
+        else {
+            // add to array
+            $layoutArray = array();
+            
+            while ($layout = $result->fetch_assoc()) {
+                array_push($layoutArray, $layout);
+            }
+            
+            // create a new layout
+            $newLayout = new Layout($layoutArray[0]['ID'], $layoutArray[0]['LABEL'], $layoutArray[0]['IMAGE'],
+                $layoutArray[0]['TOP_LEFT'], $layoutArray[0]['TOP_RIGHT'], $layoutArray[0]['BOTTOM_LEFT'], $layoutArray[0]['BOTTOM_RIGHT'], $layoutArray[0]['IS_ACTIVE']);
+            
+            // return the layout object
+            return $newLayout;
+        }
+    }
+    
+    /**
      * deletes the layout from the database with this ID
      *
      * @param int $id

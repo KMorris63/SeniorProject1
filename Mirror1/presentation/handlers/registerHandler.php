@@ -40,13 +40,36 @@ $newUser = new User(0, $userUsername, $userPassword, $email);
 // if this worked
 if ($bs->createUser($newUser)) {
     echo "User created<br>";
-    // set session variables so they are logged in after registering
-    $_SESSION['principal'] = true;
-    $_SESSION['userid'] = $newUser->getId();
-    $_SESSION['username'] = $newUser->getUsername();
+
+    // create a security service with the passed information
+    $service = new SecurityService($userUsername, $userPassword);
+    echo "after security service creation with credentials";
+
+    // session variables for userid and username should be set
+    // check over database
+    $loggedIn = $service->authenticate();
     
-    // direct user to the home page
-    header("Location: ../views/home.php");
+    // create preference 
+    $preferencebs = new PreferenceBusinessService();
+    $preferencebs->createPreference($_SESSION['userid']);
+    
+    // if it was authenticated
+    if ($loggedIn) {
+        // set the principal to true
+        $_SESSION['principal'] = true;
+    
+        // update for testing
+        echo "executed the query and got the id " . $userArray[0]['ID'] . " and username " . $userArray[0]['USERNAME'];
+    
+        // redirect to home page
+        header("Location: ../views/home.php");
+    } 
+    else {
+        // set principal to false
+        $_SESSION['principal'] = false;
+        // redirect to login
+        header("Location: ../views/register.php");
+    }
 }
 else {
     echo "<h3>Nothing inserted</h3><br>";

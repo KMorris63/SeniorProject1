@@ -20,17 +20,17 @@ class PreferenceDataService {
 	 *
 	 * @return boolean
 	 */
-    function createPreference($preference) {
+    function createPreference($preference, $userid) {
         // accepts preference object and inserts into preference table
         // access database
         $db = new Database();
         
         $connection = $db->getConnection();
-        // $id, $alert, $alertTime, $alertLabel, $alarm, $alarmTime, $alarmLabel, $alarmMessage, $days, $timezone, $location, $text, $league, $team
+        // $id, $alarm, $alarmTime, $alarmLabel, $alarmMessage, $days, $timezone, $location, $text, $league, $team
         // insert item
         // ADD ALARM SOUND
         // for array of days, maybe save like 0|2|5|6 then split when retrieving from database or creating a module section for config file
-        $stmt = $connection->prepare("INSERT INTO preferences (ALERT, ALERT_TIME, ALERT_LABEL, ALARM, ALARM_TIME, ALARM_LABEL, ALARM_MESSAGE, DAYS, TIMEZONE, LOCATION, TEXT, LEAGUE, TEAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $connection->prepare("INSERT INTO preferences (USER_ID, ALARM, ALARM_TIME, ALARM_LABEL, ALARM_MESSAGE, ALARM_SOUND, DAYS, TIMEZONE, LOCATION, TEXT, LEAGUE, TEAM) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
         // if the statement wasn't prepared
         if (!$stmt) {
@@ -39,13 +39,11 @@ class PreferenceDataService {
         }
         
         // get parameters
-        $alert = $preference->getAlert();
-        $alertTime = $preference->getAlertTime();
-        $alertLabel = $preference->getAlertLabel();
         $alarm = $preference->getAlarm();
         $alarmTime = $preference->getAlarmTime();
         $alarmLabel = $preference->getAlarmLabel();
         $alarmMessage = $preference->getAlarmMessage();
+        $alarmSound = $preference->getAlarmSound();
         $days = $preference->getDays();
         // CONVERT TO STRING FOR DATABASE SAVING?
         $timezone = $preference->getTimezone();
@@ -55,7 +53,7 @@ class PreferenceDataService {
         $team = $preference->getTeam();
         
         // bind parameters s means string, i means int, d means decimal
-        $stmt->bind_param("ississsssssss", $alert, $alertTime, $alertLabel, $alarm, $alarmTime, $alarmLabel, $alarmMessage, $days, $timezone, $location, $text, $league, $team);
+        $stmt->bind_param("iissssssssss", $userid, $alarm, $alarmTime, $alarmLabel, $alarmMessage, $alarmSound, $days, $timezone, $location, $text, $league, $team);
         
         // execute query
         $stmt->execute();
@@ -114,13 +112,13 @@ class PreferenceDataService {
             }
             
             // create a new preferences object
-            $newPreferences = new Preference($preferencesArray[0]['ID'], $preferencesArray[0]['ALERT'], 
-            		$preferencesArray[0]['ALERT_TIME'], $preferencesArray[0]['ALERT_LABEL'], $preferencesArray[0]['ALARM'], 
+            $newPreferences = new Preference($preferencesArray[0]['ID'], $preferencesArray[0]['ALARM'], 
             		$preferencesArray[0]['ALARM_TIME'], $preferencesArray[0]['ALARM_LABEL'], $preferencesArray[0]['ALARM_MESSAGE'], 
+                        $preferencesArray[0]['ALARM_SOUND'],
             		$preferencesArray[0]['DAYS'], $preferencesArray[0]['TIMEZONE'], $preferencesArray[0]['LOCATION'], 
             		$preferencesArray[0]['TEXT'], $preferencesArray[0]['LEAGUE'], $preferencesArray[0]['TEAM']);
             
-            // return the layout object
+            // return the preferences object
             return $newPreferences;
         }
     }
@@ -133,7 +131,7 @@ class PreferenceDataService {
      * @return boolean
      */
     // NEEDS DEVELOPMENT
-    function updateOne($id, $preference) {
+    function updateOne($userid, $preference) {
         // id is the preferences to update, returns true for success, preferences is object used to change
         // access database
         $db = new Database();
@@ -141,9 +139,10 @@ class PreferenceDataService {
         $connection = $db->getConnection();
         
         // update item
-        $stmt = $connection->prepare("UPDATE preferences SET ALERT = ?, ALERT_TIME = ?, ALERT_LABEL = ?, ALARM = ?, ALARM_TIME = ?, 
-									ALARM_LABEL = ?, ALARM_MESSAGE = ?, DAYS = ?, TIMEZONE = ?, LOCATION = ?, TEXT = ?, LEAGUE = ?, 
-									TEAM = ? WHERE ID = ? LIMIT 1");
+        $stmt = $connection->prepare("UPDATE preferences SET ALARM = ?, ALARM_TIME = ?, 
+									ALARM_LABEL = ?, ALARM_MESSAGE = ?,
+                                                                        ALARM_SOUND = ?, DAYS = ?, TIMEZONE = ?, LOCATION = ?, TEXT = ?, LEAGUE = ?, 
+									TEAM = ? WHERE USER_ID = ? LIMIT 1");
         
         // if the statement wasn't prepared
         if (!$stmt) {
@@ -152,15 +151,12 @@ class PreferenceDataService {
         }
         
         // get parameters
-        $alert = $preference->getAlert();
-        $alertTime = $preference->getAlertTime();
-        $alertLabel = $preference->getAlertLabel();
         $alarm = $preference->getAlarm();
         $alarmTime = $preference->getAlarmTime();
         $alarmLabel = $preference->getAlarmLabel();
         $alarmMessage = $preference->getAlarmMessage();
+        $alarmSound = $preference->getAlarmSound();
         $days = $preference->getDays();
-        // CONVERT TO STRING FOR DATABASE SAVING?
         $timezone = $preference->getTimezone();
         $location = $preference->getLocation();
         $text = $preference->getText();
@@ -168,7 +164,7 @@ class PreferenceDataService {
         $team = $preference->getTeam();
         
         // bind parameters s means string, i means int, d means decimal
-        $stmt->bind_param("ississsssssssi", $alert, $alertTime, $alertLabel, $alarm, $alarmTime, $alarmLabel, $alarmMessage, $days, $timezone, $location, $text, $league, $team, $id);
+        $stmt->bind_param("issssssssssi", $alarm, $alarmTime, $alarmLabel, $alarmMessage, $alarmSound, $days, $timezone, $location, $text, $league, $team, $userid);
         
         // execute query
         $stmt->execute();
